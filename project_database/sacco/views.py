@@ -48,3 +48,11 @@ def delete_customer(request, customer_id):
     customer = Customer.objects.get(id=customer_id)#select * from customers where id=something
     customer.delete()
     return redirect('customers')
+
+
+def customer_details(request, customer_id):
+    customer = Customer.objects.get(id=customer_id)
+    deposits = Deposits.objects.filter(customer_id=customer_id)
+    return render(request, 'details.html', {"deposits": deposits, "customer": customer})
+
+
