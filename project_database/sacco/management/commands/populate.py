@@ -110,6 +110,6 @@ class Command(BaseCommand):
             cusotmer = customer(**customer)
             customer.save()
         self.stdout.write(
-            self.style.SUCCESS("SUCCESS ON POPULATION")
-        )    
+            self.style.SUCCESS("Success in populating data")
+        )   #this command is just like print,  only that it displays in different color in the terminal. 
 
