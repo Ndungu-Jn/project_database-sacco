@@ -22,7 +22,7 @@
             </tr>
 
             
-            {% for customer in customers %}
+            {% for customer in data.object_list %}
                 <tr>
                     <td>{{ customer.id }}</td>
                     <td>{{ customer.first_name }}</td>
@@ -38,13 +38,21 @@
                 <p>No customers in the sacco</p>
                 
             {% endfor %}
-                
-
             
-           
-                
-
         </table>
+        <div class="row justify-content-center">
+            <div class="col-sm-2">
+
+                {% if data.has_previous %}
+                    <a class="btn btn-outline-info btn-sm" href="?page={{ data.previous_page_number }}"> << </a>   
+                {% endif %}
+                <span class="mx-3" >{{data.number}}</span>
+                {% if data.has_next %}
+                    <a class="btn btn-outline-info btn-sm" href="?page={{ data.next_page_number }}"> >> </a>
+   
+                {% endif %} 
+            </div>
+        </div>
     </div>
 
     

@@ -31,13 +31,8 @@ class Deposits(models.Model):
 
     class Meta:
         db_table = 'deposits'
-        
 
-
-
-
-
-
+  
 #run migrations
 #python3  manage.py makemigrations
 #python3 manage.py migrate
