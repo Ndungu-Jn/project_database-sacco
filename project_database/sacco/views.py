@@ -8,6 +8,7 @@ from sacco.models import Customer, Deposits
 # Create your views here.
 
 def test(request):
+
     #save a customer
     # customer1 = Customer(first_name='Jaba', last_name='John', email='jj@gmial.com', dob='2000-11-24', gender='Male', weight='62')
     # customer1.save()
@@ -29,3 +30,9 @@ def test(request):
     deposit_count = Deposits.objects.count()
 
     return HttpResponse(f"Ok, Done, We have {customer_count} customers and {deposit_count} deposits")
+
+
+def customers(request):
+    data = Customer.objects.all()
+
+    return render(request, 'customers.html', {"customers": data})

@@ -21,5 +21,5 @@ from sacco import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.test, name='test'),
+    path('', views.customers, name='customers'),
 ]
