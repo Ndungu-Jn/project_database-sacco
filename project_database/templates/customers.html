@@ -8,6 +8,41 @@
 
 
 {% block content %}
+    <div class="container">
+        <h2>Sacco Customers </h2>
+        <table class="table table-striped">
+            
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Nmae</th>
+                <th>Email</th>
+                <th>Joining Date</th>
+            </tr>
+
+            
+            {% for customer in Customers %}
+                <tr>
+                    <td>{{ customer.id }}</td>
+                    <td>{{ customer.first_name }}</td>
+                    <td>{{ customer.last_name }}</td>
+                    <td>{{ customer.emial }}</td>
+                    <td>{{ customer.created_at }}</td>
+                </tr>
+                
+            {% empty %}
+                <p>No customers in the sacco</p>
+                
+            {% endfor %}
+                
+
+            
+           
+                
+
+        </table>
+    </div>
+
     
 {% endblock content %}
     

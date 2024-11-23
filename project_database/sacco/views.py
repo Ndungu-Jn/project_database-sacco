@@ -33,6 +33,6 @@ def test(request):
 
 
 def customers(request):
-    data = Customer.objects.all()
+    data = Customer.objects.all() #ORM -- object relational matter select * from customers
 
     return render(request, 'customers.html', {"customers": data})
