@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 
 from sacco.models import Customer, Deposits
@@ -36,3 +36,8 @@ def customers(request):
     data = Customer.objects.all() #ORM -- object relational matter select * from customers
 
     return render(request, 'customers.html', {"customers": data})
+
+def delete_customer(request, customer_id):
+    customer = Customer.objects.get(id=customer_id)#select * from customers where id=something
+    customer.delete()
+    return redirect('customers')
