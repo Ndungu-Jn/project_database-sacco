@@ -41,3 +41,4 @@ class Deposits(models.Model):
 #run migrations
 #python3  manage.py makemigrations
 #python3 manage.py migrate
+#python3 manage.py populate  -- for this populate is our own name.
