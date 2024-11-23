@@ -1,11 +1,10 @@
+from django.core.management.base import BaseCommand
 
-from django.core.management import BaseCommand
-
+from sacco.models import Customer
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
         customers = [{"first_name":"Piotr","last_name":"Rockwell","email":"prockwell0@ucoz.com","gender":"Male","weight":76,"dob":"2003-01-20"},
-                    
 {"first_name":"Gilles","last_name":"Samms","email":"gsamms1@telegraph.co.uk","gender":"Male","weight":59,"dob":"1999-03-31"},
 {"first_name":"Paige","last_name":"Szymaniak","email":"pszymaniak2@vistaprint.com","gender":"Female","weight":73,"dob":"2003-01-23"},
 {"first_name":"Annadiana","last_name":"Andress","email":"aandress3@marketwatch.com","gender":"Female","weight":54,"dob":"2001-09-14"},
@@ -106,10 +105,13 @@ class Command(BaseCommand):
 {"first_name":"Bucky","last_name":"Warcup","email":"bwarcup2q@lulu.com","gender":"Male","weight":40,"dob":"2003-07-23"},
 {"first_name":"Chas","last_name":"Moulding","email":"cmoulding2r@dyndns.org","gender":"Male","weight":52,"dob":"2001-12-13"}]
         
-        for customer in customers:
-            cusotmer = customer(**customer)
+        for c in customers:
+            customer = Customer(**c)
             customer.save()
-        self.stdout.write(
-            self.style.SUCCESS("Success in populating data")
-        )   #this command is just like print,  only that it displays in different color in the terminal. 
 
+        self.stdout.write(
+            self.style.SUCCESS("Successfully populated customers")
+        )#this is the same as print,  just that this prints out with color in the terminal.
+
+        print("Populated customers")
+    
