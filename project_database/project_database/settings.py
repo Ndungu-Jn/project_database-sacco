@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sacco'
+    'sacco',  #added the app
+    'crispy_forms', #adding crispy forms
+    'crispy_bootstrap5'  #adding bootstrap5
 ]
 
 MIDDLEWARE = [
@@ -126,3 +128,7 @@ STATICFILES_DIRS = [BASE_DIR/'sacco/static']
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"  #added for bootstrap5 to work
+
+CRISPY_TEMPLATE_PACK = "bootstrap5" #added for bootstrap5 to work
