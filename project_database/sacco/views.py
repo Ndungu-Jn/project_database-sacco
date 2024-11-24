@@ -35,7 +35,7 @@ def test(request):
 
 
 def customers(request):
-    data = Customer.objects.all().order_by('id').values() #ORM -- object relational matter select * from customers
+    data = Customer.objects.all().order_by('-id').values() #ORM -- object relational matter select * from customers
     #pagination.
     paginator = Paginator(data, 15)
     page_number = request.GET.get('page', 1)
