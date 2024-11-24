@@ -35,6 +35,7 @@ def test(request):
 
 def customers(request):
     data = Customer.objects.all().order_by('id').values() #ORM -- object relational matter select * from customers
+    #pagination.
     paginator = Paginator(data, 15)
     page_number = request.GET.get('page', 1)
     try:
@@ -55,4 +56,8 @@ def customer_details(request, customer_id):
     deposits = Deposits.objects.filter(customer_id=customer_id)
     return render(request, 'details.html', {"deposits": deposits, "customer": customer})
 
+
+def add_customer(request):
+
+    return render(request, 'customer_form.html')
 

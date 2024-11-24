@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Add Customer</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-4">
+                <form action="{% url 'add_customer' %}" method="post" >
+
+                    <button class="btn btn-dark">Save Customer</button>
+                </form>
+            </div>
+        </div>
+    </div>   
+{% endblock content %}
+    
+    
