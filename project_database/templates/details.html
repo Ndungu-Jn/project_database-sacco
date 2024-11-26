@@ -41,13 +41,16 @@
                         <td>{{ total }}</td>
                     </tr>
                 </table>
-            
-            
-
+                
             </div>
 
             <div class="col-sm-4">
-                <img src="{% static 'profile.png' %}" alt="">
+                <p class="text-center">Profile Picture</p>
+                {% if customer.profile_pic  %}
+                    <img class= "img-fluid mx-auto d-block profile" src="{{ customer.profile_pic.url }} " alt="">
+                {% else %}
+                	<img class= "img-fluid mx-auto d-block profile" src="{% static 'default.png' %} }" alt="">
+                {% endif %} 
             </div>
     
             <div class="col-sm-4">
