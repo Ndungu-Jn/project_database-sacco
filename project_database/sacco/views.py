@@ -1,9 +1,10 @@
-from django.db.models import Q
+from django.db.models import Q, Sum
 from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
-from sacco.app_forms import CustomerForm
+
+from sacco.app_forms import CustomerForm, DepositForm
 from sacco.models import Customer, Deposits
 
 
@@ -53,10 +54,15 @@ def delete_customer(request, customer_id):
     return redirect('customers')
 
 
+
+
+
 def customer_details(request, customer_id):
     customer = Customer.objects.get(id=customer_id)
     deposits = Deposits.objects.filter(customer_id=customer_id)
-    return render(request, 'details.html', {"deposits": deposits, "customer": customer})
+    total = Deposits.objects.filter(customer=customer).filter(status=True).aggregate(Sum('amount'))["amount__sum"]
+
+    return render(request, 'details.html', {"deposits": deposits, "customer": customer, 'total': total})
 
 
 def add_customer(request):
@@ -97,3 +103,18 @@ def search_customer(request):
     return render(request, 'search.html', {"data": paginated_data})
 
     #select * from customers where first _name LIKE '%noel%'
+
+def deposit(request, customer_id):
+    customer = get_object_or_404(Customer, id=customer_id)
+    if request.method == "POST":
+        form = DepositForm(request.POST)
+        if form.is_valid():
+            amount = form.cleaned_data['amount']
+            depo = Deposits(amount=amount, status=True, customer=customer)
+            depo.save()
+            return redirect('customers')
+
+    else:
+        form = DepositForm()
+
+    return render(request,'deposit_form.html', {"form":form, 'customer': customer} )

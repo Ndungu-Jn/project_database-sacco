@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>add Deposit</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-4 border px-3 py-3 mt-3">
+                <h3>Names {{ customer.first_name }} {{ customer.last_name }}</h3>
+                <p>Email {{ customer.email }}</p>
+                <p>Joining Date {{ customer.created_at | date:"d-m-Y" }}</p>
+                <form action="" method="post" >
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <button class="btn btn-dark w-100">Add deposit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
