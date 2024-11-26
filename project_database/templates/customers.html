@@ -19,6 +19,7 @@
                 <th>Email</th>
                 <th>Joining Date</th>
                 <th>Delete</th>
+                <th>update</th>
                 <th>Details</th>
             </tr>
 
@@ -29,15 +30,18 @@
                     <td>{{ customer.first_name }}</td>
                     <td>{{ customer.last_name }}</td>
                     <td>{{ customer.email }}</td>
-                    <td>{{ customer.created_at | date:"d-m-y" }}</td>
+                    <td>{{ customer.created_at | date:"d-m-Y" }}</td>
 
                     <td>
-                        <a class="btn btn-danger" href="{% url 'delete_customer' customer.id %}">Remove</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'delete_customer' customer.id %}">Remove</a>
                     </td>
-            
-
+                    
                     <td>
-                    <a class="btn btn-primary" href="{% url 'customer_details' customer.id %}">Details</a>
+                        <a class="btn btn-success btn-sm" href="{% url 'update_customer' customer.id %}">Update</a>
+                    </td>
+                    
+                    <td>
+                    <a class="btn btn-primary btn-sm" href="{% url 'customer_details' customer.id %}">Details</a>
                     </td>
                 </tr>
             

@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
@@ -69,6 +69,16 @@ def add_customer(request):
     return render(request, 'customer_form.html', {'form':form})
 
 
+def update_customer(request, customer_id):
+    customer = get_object_or_404(Customer, id=customer_id)
+    if request.method == "POST":
+        form = CustomerForm(request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            return redirect('customers')
+    else:
+        form = CustomerForm(instance=customer)
+    return render(request, 'customer_update_form.html', {'form':form})
 
 #pip3 install django-crispy-forms
 #pip3 install crispy-bootstrap5

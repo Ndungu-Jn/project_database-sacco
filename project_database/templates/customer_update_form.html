@@ -1,22 +1,21 @@
 {% extends 'layout.html' %}
-{% load crispy_forms_tags %}  
+{% load crispy_forms_tags %}
 
 {% block title %}
-    <title>Add Customer</title>
+    <title>Update customer</title>
 {% endblock title %}
 
 {% block content %}
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-4 border px-3 py-3 mt-3">
-                <form action="{% url 'add_customer' %}" method="post" >
+                <form action="" method="post" >
                     {% csrf_token %}
-                    {{ form | crispy }}  
-                    <button class="btn btn-dark w-100">Add customer</button>
+                    {{ form | crispy }}
+                    <button class="btn btn-dark w-100">Update customer</button>
                 </form>
             </div>
         </div>
-    </div>   
+    </div>
 {% endblock content %}
-    
-    
+
