@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -82,3 +83,17 @@ def update_customer(request, customer_id):
 
 #pip3 install django-crispy-forms
 #pip3 install crispy-bootstrap5
+def search_customer(request):
+    search_term = request.GET.get('search','').strip()
+    data = Customer.objects.filter(Q(first_name__icontains=search_term) | Q(last_name__icontains=search_term) | Q(email__icontains=search_term))
+    # pagination.
+    paginator = Paginator(data, 15)
+    page_number = request.GET.get('page', 1)
+    try:
+        paginated_data = paginator.page(page_number)
+    except PageNotAnInteger | EmptyPage:
+        paginated_data = paginator.page(1)
+
+    return render(request, 'search.html', {"data": paginated_data})
+
+    #select * from customers where first _name LIKE '%noel%'
