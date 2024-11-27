@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.db.models import Q, Sum
 from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
@@ -51,11 +52,8 @@ def customers(request):
 def delete_customer(request, customer_id):
     customer = Customer.objects.get(id=customer_id)#select * from customers where id=something
     customer.delete()
+    messages.info(request, f"{customer.first_name} was deleted!")
     return redirect('customers')
-
-
-
-
 
 def customer_details(request, customer_id):
     customer = Customer.objects.get(id=customer_id)
@@ -70,6 +68,7 @@ def add_customer(request):
         form = CustomerForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, f"Customer {form.cleaned_data['first_name']} has been created!")
             return redirect('customers')
     else:
         form = CustomerForm()
@@ -82,6 +81,7 @@ def update_customer(request, customer_id):
         form = CustomerForm(request.POST, request.FILES,  instance=customer)
         if form.is_valid():
             form.save()
+            messages.success(request, f"Customer {form.cleaned_data['first_name']} has been updated!")
             return redirect('customers')
     else:
         form = CustomerForm(instance=customer)
@@ -112,6 +112,7 @@ def deposit(request, customer_id):
             amount = form.cleaned_data['amount']
             depo = Deposits(amount=amount, status=True, customer=customer)
             depo.save()
+            messages.success(request, 'Your deposit has been successfully saved')
             return redirect('customers')
 
     else:
