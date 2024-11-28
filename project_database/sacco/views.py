@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q, Sum
 from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
@@ -120,12 +121,27 @@ def deposit(request, customer_id):
 
     return render(request,'deposit_form.html', {"form":form, 'customer': customer} )
 
-
+#logic for the login page.
 def login_user(request):
-    form = LoginForm()
-    return render(request, "login_form.html", {"form":form})
+    if request.method == "GET":
+        form = LoginForm()
+        return render(request, "login_form.html", {"form":form})
+    elif request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user:
+                login(request, user)  #sessions -- what is stored in your database--server  cookies--data stored on the browser.
+                return redirect('customers')
+        messages.error(request, 'Invalid username or password')
+        return render(request, "login_form.html", {"form":form})
+
+
 
 def signout_user(request):
-    return None
+    logout(request)
+    return redirect('login')
 
 #pip3 install Pillow  -- manipulate images.
