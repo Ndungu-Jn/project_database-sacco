@@ -31,7 +31,8 @@ urlpatterns = [
     path('customers/details/<int:customer_id>', views.customer_details, name='customer_details'),
     path('customers/update/<int:customer_id>', views.update_customer, name='update_customer'),
     path('customers/search', views.search_customer, name='search_customer'),
-
+    path('login', views.login_user, name='login'),
+    path('logout', views.signout_user, name='logout'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

@@ -31,3 +31,5 @@ admin.site.register(Deposits, DepositsAdmin)
 #python3 manage.py
 #admin@gmail.com
 #123456
+
+#p@55ward

@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
-from sacco.app_forms import CustomerForm, DepositForm
+from sacco.app_forms import CustomerForm, DepositForm, LoginForm
 from sacco.models import Customer, Deposits
 
 
@@ -120,5 +120,12 @@ def deposit(request, customer_id):
 
     return render(request,'deposit_form.html', {"form":form, 'customer': customer} )
 
+
+def login_user(request):
+    form = LoginForm()
+    return render(request, "login_form.html", {"form":form})
+
+def signout_user(request):
+    return None
 
 #pip3 install Pillow  -- manipulate images.
