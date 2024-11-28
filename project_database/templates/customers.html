@@ -18,10 +18,11 @@
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Joining Date</th>
+                <th>Details</th> 
                 <th>Delete</th>
                 <th>update</th>
                 <th>Deposit</th>
-                <th>Details</th>
+                
             </tr>
 
             
@@ -32,21 +33,31 @@
                     <td>{{ customer.last_name }}</td>
                     <td>{{ customer.email }}</td>
                     <td>{{ customer.created_at | date:"d-m-Y" }}</td>
-
-                    <td>
-                        <a class="btn btn-danger btn-sm" href="{% url 'delete_customer' customer.id %}">Remove</a>
-                    </td>
                     
+                    
+                    {% if perms.sacco.delete_customer %}
+                    	 <td>
+                        <a class="btn btn-danger btn-sm" href="{% url 'delete_customer' customer.id %}">Remove</a>
+                         </td>
+                    {% endif %}
+                    {% if perms.sacco.change_customer %}
                     <td>
                         <a class="btn btn-success btn-sm" href="{% url 'update_customer' customer.id %}">Update</a>
                     </td>
+                    {% endif %}
+                
+                    {% if perms.sacco.add_deposit %}
                     <td>
                         <a class="btn btn-secondary btn-sm" href="{% url 'deposit' customer.id %}">Deposit </a>
                     </td>
+                    {% endif %}
                     
+                    {% if perms.sacco.view_customer%}
                     <td>
                     <a class="btn btn-outline-primary btn-sm" href="{% url 'customer_details' customer.id %}">Details</a>
                     </td>
+                    {% endif %}
+                
                 </tr>
             
                 
