@@ -20,7 +20,7 @@ class Customer(models.Model):
     updated_at = models.DateField(auto_now=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} {self.gender}"
+        return f"{self.first_name} {self.last_name}"
 
 
     class Meta:
